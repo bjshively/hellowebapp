@@ -1,4 +1,10 @@
 from django.shortcuts import render
 
 def index(request):
-    return render(request, 'index.html')
+    
+    #Passing a number into the view
+    number = 6
+    
+    return render(request, 'index.html', {
+            'number': number,
+        })
