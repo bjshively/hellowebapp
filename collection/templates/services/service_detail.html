@@ -1,0 +1,6 @@
+{% extends 'layouts/base.html' %}
+{% block title %}{{ service.name }} - {{ block.super }}{% endblock %}
+{% block content %}
+<h1>{{ service.name }}</h2>
+<p>{{ service.description }}</p>
+{% endblock %}
