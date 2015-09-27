@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.template.defaultfilters import slugify
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from collection.forms import ServiceForm
 from collection.models import Service
 
@@ -19,9 +22,13 @@ def service_detail(request, slug):
     })
         
 #Edit service details
+@login_required
 def edit_service(request, slug):
     #Get the object
     service = Service.objects.get(slug=slug)
+    
+    if service.user != request.user:
+        raise Http404
     
     #Set the form we're using
     form_class = ServiceForm
@@ -42,5 +49,24 @@ def edit_service(request, slug):
     #render the template
     return render(request, 'services/edit_service.html', {
         'service': service,
+        'form': form,
+    })
+
+def create_service(request):
+    form_class = ServiceForm
+    
+    if request.method == 'POST':
+        form = form_class(request.POST)
+        if form.is_valid():
+            service = form.save(commit=False)
+            service.user = request.user
+            service.slug = slugify(service.name)
+            service.save()
+            return redirect('service_detail', slug=service.slug)
+            
+    else:
+        form = form_class()
+        
+    return render(request, 'services/create_service.html', {
         'form': form,
     })

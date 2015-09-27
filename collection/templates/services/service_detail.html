@@ -3,5 +3,7 @@
 {% block content %}
 <h1>{{ service.name }}</h2>
 <p><strong>Details:</strong> {{ service.description }}</p>
-<a href="{% url 'edit_service' slug=service.slug %}">Edit me!</a>
+{% if user == service.user %}
+    <p>><a href="{% url 'edit_service' slug=service.slug %}">Edit me!</a></p
+{% endif %}
 {% endblock %}
