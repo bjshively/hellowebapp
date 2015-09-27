@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
 <head>
-    <title>{% block title %}My Hello Web App Project{% endblock %}</title>
+    <title>{% block title %}Car Maintenance Log{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" /> -->
     {% block header %}{% endblock %}
@@ -9,7 +9,7 @@
 <body>
     <div class="container">
     <header>
-        <h1>Hello Web App</h1>
+        <h1>Car Maintenance Log</h1>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
                 <li><a href="{% url 'home' %}">Home</a></li>
