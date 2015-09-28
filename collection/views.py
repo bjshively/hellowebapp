@@ -5,7 +5,7 @@ from django.http import Http404
 from collection.forms import ServiceForm
 from collection.models import Service
 
-#Index - list of all services
+#index - list of all services
 def index(request):
     services = Service.objects.all()
 
@@ -70,3 +70,16 @@ def create_service(request):
     return render(request, 'services/create_service.html', {
         'form': form,
     })
+    
+#Browse views
+def browse_by_name(request, initial=None):
+    if initial:
+        services = Service.objects.filter(
+            name__istartswith=initial).order_by('name')
+    else:
+        services = Service.objects.all().order_by('name')
+        
+    return render(request, 'search/search.html', {
+        'services': services,
+        'initial': initial,
+        })
