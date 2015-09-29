@@ -3,3 +3,12 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+header h1 a {
+    color: #000;
+}
+
+header h1 a:hover {
+    color: #000;
+    text-decoration: none;
+}
